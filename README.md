@@ -27,8 +27,3 @@
   
   
   
-  效果图
-
-![输入图片说明](http://git.oschina.net/uploads/images/2016/1129/204109_2e0eb116_1110335.jpeg "在这里输入图片标题")
-![输入图片说明](http://git.oschina.net/uploads/images/2016/1129/204119_e64b2915_1110335.jpeg "在这里输入图片标题")
-![输入图片说明](http://git.oschina.net/uploads/images/2016/1129/204131_df5ed465_1110335.jpeg "在这里输入图片标题")
