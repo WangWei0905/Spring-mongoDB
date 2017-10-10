@@ -32,10 +32,59 @@
 <mvc:resources location="/js/"  mapping="/js/**" />  
 <mvc:resources location="/css/"  mapping="/css/**" />  
 <!-- 页面转向解析 -->
-<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-	<property name="prefix" value="/WEB-INF/" />
-	<property name="suffix" value=".jsp" />
-</bean>	
+    <bean id="velocityConfigurer"
+          class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath">
+            <value>/WEB-INF/view</value>
+        </property>
+        <property name="velocityProperties">
+            <props>
+                <prop key="input.encoding">utf-8</prop>
+                <prop key="output.encoding">utf-8</prop>
+                <prop key="runtime.log">velocity_loger</prop>
+                <prop key="runtime.log.logsystem.class">org.apache.velocity.runtime.log.SimpleLog4JLogSystem
+                </prop>
+                <prop key="runtime.log.error.stacktrace">false</prop>
+                <prop key="runtime.log.warn.stacktrace">false</prop>
+                <prop key="runtime.log.info.stacktrace">false</prop>
+                <prop key="runtime.log.invalid.reference">false</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+        <!-- <property name="cache" value="false" /> -->
+        <property name="dateToolAttribute">
+            <value>dateTool</value>
+        </property>
+        <!-- <property name="toolboxConfigLocation" value="/toolbox.xml" /> -->
+        <property name="suffix">
+            <value>.html</value>
+        </property>
+        <property name="contentType">
+            <value>text/html;charset=utf-8</value>
+        </property>
+        <property name="allowSessionOverride" value="true" />
+        <property name="allowRequestOverride" value="true" />
+        <property name="exposeSessionAttributes" value="true" />
+        <property name="requestContextAttribute" value="rc" />
+        <property name="exposeRequestAttributes" value="true" />
+        <property name="layoutKey" value="layout" />
+        <property name="screenContentKey" value="screen_content" />
+        <property name="layoutUrl" value="layout/empty.vm" />
+        <!--<property name="attributesMap">-->
+            <!--<map>-->
+
+                <!--<entry key="systools"><ref bean="commonToolsAction" /></entry>-->
+                <!--<entry key="pmstools"><ref bean="codeDictClient" /></entry>-->
+                <!--<entry key="usertools"><ref bean="principal" /></entry>-->
+            <!--</map>-->
+        <!--</property>-->
+    </bean>
+<!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+	<!--<property name="prefix" value="/WEB-INF/" />-->
+	<!--<property name="suffix" value=".jsp" />-->
+<!--</bean>	-->
 <!-- 处理请求时返回json字符串的中文乱码问题 ,@responsebody直接返回json-->
     <mvc:annotation-driven>  
         <mvc:message-converters>  
